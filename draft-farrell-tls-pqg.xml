@@ -14,9 +14,9 @@
 <?rfc rfcedstyle="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="bcp" docName="draft-farrell-tls-pqg-00" ipr="trust200902" >
+<rfc category="bcp" docName="draft-farrell-tls-pqg-01" ipr="trust200902" >
   <front>
-    <title abbrev="PQ Guidance for TLS">Post-Quantum Guidance for TLS.</title>
+    <title abbrev="PQ Guidance for IETF protocolls">Post-Quantum Guidance for IETF protocolls.</title>
 
     <author fullname="Stephen Farrell" initials="S." surname="Farrell">
       <organization>Trinity College Dublin</organization>
@@ -33,20 +33,18 @@
       </address>
     </author>
 
-    <date year="2024"/>
+    <date year="2025"/>
 
     <area>Security Area</area>
 
-    <workgroup>TLS</workgroup>
-
-    <keyword>TLS</keyword>
+    <keyword>TLS, PQC</keyword>
 
     <keyword>Post-Quantum</keyword>
     <keyword>Guidance</keyword>
 
     <abstract>
         <t>We provide guidance on the use of post-quantum algorithms for those
-            deploying applications using TLS.</t>
+            deploying applications using IETF protocols.</t>
     </abstract>
   </front>
 
@@ -54,31 +52,42 @@
     <section title="Introduction">
 
         <t>
-            [[This is not an "official" TLS WG work item, but is being proposed
-            as such. The source for this is in https://github.com/sftcd/pqg/
+            [[This is not an "official" work item anywhere, the -00 was proposed
+            to TLS as such, but this version generalises to more than just TLS so 
+            is being proposed to the secdispatch list. The author does not expect
+            that the current text will garner rough consensus, but wonders if we
+            could get something useful that would without adding many words.
+            The source for this is in https://github.com/sftcd/pqg/
             PRs are welcome there too.]]
         </t>
 
         <t>
             Due to concerns about the possible future existence of a
             cryptographically
-            relevant quantum computer (CRQC), additional TLS
+            relevant quantum computer (CRQC), additional IANA
             <xref target="RFC8446"/>
             codepoints
             have been defined for algorithms that are hoped to remain
             secure even in the face of a CRQC. Adding code-points for
-            to the relevant IANA registries with the
-            RECOMMENDED column set to 'n' doesn't require IETF consensus. This
+            to the relevant IANA registries often
+            doesn't require IETF consensus. This
             means that anyone can register code-points for their
             favoured approach. In particular various government
             entities in various countries have made contradictory
             recommendations in this space, leading to potential
             confusion for those deploying applilcations using TLS.
+            For example, anyone can register a PQ algorithm in the 
+            TLS registries with the RECOMMENDED column set to 'n'
         </t>
 
-        <t>This document sets out a deliberately consise sets of recommendations
-        for typical uses of post-quantum algorithms. This assumes the reader is familiar
-            with the topic.</t>
+        <t>
+            This document sets out a deliberately consise sets of
+            recommendations for typical uses of post-quantum
+            algorithms. This assumes the reader is familiar
+            with the topic. Some implementations and environments
+            may have to meet other requirements that conflict with
+            this guidance.
+        </t>
 
       </section>
 
@@ -96,14 +105,14 @@
               hybrid KEMs, such as X25519MLKEM768.</t>
 
           <t>Once it becomes practical to do the above, we do not recommend use
-              of non-hybrid groups.</t>
+              of non-hybrid groups or "pure" PQ KEMs.</t>
 
       </section>
 
       <section title="Do nothing for now on signatures">
 
           <t>We recommend taking no action at all at this point in time in
-              relation to signatures.</t>
+              relation to deployment of PQ signatures.</t>
 
       </section>
 

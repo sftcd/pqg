@@ -2,19 +2,19 @@
 
 
 
-TLS                                                           S. Farrell
+Network Working Group                                         S. Farrell
 Internet-Draft                                    Trinity College Dublin
-Intended status: Best Current Practice                  15 December 2024
-Expires: 18 June 2025
+Intended status: Best Current Practice                   15 October 2025
+Expires: 18 April 2026
 
 
-                     Post-Quantum Guidance for TLS.
-                        draft-farrell-tls-pqg-00
+               Post-Quantum Guidance for IETF protocolls.
+                        draft-farrell-tls-pqg-01
 
 Abstract
 
    We provide guidance on the use of post-quantum algorithms for those
-   deploying applications using TLS.
+   deploying applications using IETF protocols.
 
 Status of This Memo
 
@@ -31,11 +31,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 June 2025.
+   This Internet-Draft will expire on 18 April 2026.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,16 +53,16 @@ Copyright Notice
 
 
 
-Farrell                   Expires 18 June 2025                  [Page 1]
+Farrell                   Expires 18 April 2026                 [Page 1]
 
-Internet-Draft             PQ Guidance for TLS             December 2024
+Internet-Draft       PQ Guidance for IETF protocolls        October 2025
 
 
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   2
-   3.  Start using hybrid KEMs . . . . . . . . . . . . . . . . . . .   2
+   3.  Start using hybrid KEMs . . . . . . . . . . . . . . . . . . .   3
    4.  Do nothing for now on signatures  . . . . . . . . . . . . . .   3
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
    6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   3
@@ -72,24 +72,30 @@ Table of Contents
 
 1.  Introduction
 
-   [[This is not an "official" TLS WG work item, but is being proposed
-   as such.  The source for this is in https://github.com/sftcd/pqg/ PRs
+   [[This is not an "official" work item anywhere, the -00 was proposed
+   to TLS as such, but this version generalises to more than just TLS so
+   is being proposed to the secdispatch list.  The author does not
+   expect that the current text will garner rough consensus, but wonders
+   if we could get something useful that would without adding many
+   words.  The source for this is in https://github.com/sftcd/pqg/ PRs
    are welcome there too.]]
 
    Due to concerns about the possible future existence of a
-   cryptographically relevant quantum computer (CRQC), additional TLS
+   cryptographically relevant quantum computer (CRQC), additional IANA
    [RFC8446] codepoints have been defined for algorithms that are hoped
    to remain secure even in the face of a CRQC.  Adding code-points for
-   to the relevant IANA registries with the RECOMMENDED column set to
-   'n' doesn't require IETF consensus.  This means that anyone can
-   register code-points for their favoured approach.  In particular
-   various government entities in various countries have made
-   contradictory recommendations in this space, leading to potential
-   confusion for those deploying applilcations using TLS.
+   to the relevant IANA registries often doesn't require IETF consensus.
+   This means that anyone can register code-points for their favoured
+   approach.  In particular various government entities in various
+   countries have made contradictory recommendations in this space,
+   leading to potential confusion for those deploying applilcations
+   using TLS.  For example, anyone can register a PQ algorithm in the
+   TLS registries with the RECOMMENDED column set to 'n'
 
    This document sets out a deliberately consise sets of recommendations
    for typical uses of post-quantum algorithms.  This assumes the reader
-   is familiar with the topic.
+   is familiar with the topic.  Some implementations and environments
+   may have to meet other requirements that conflict with this guidance.
 
 2.  Terminology
 
@@ -99,25 +105,27 @@ Table of Contents
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
+
+
+
+
+Farrell                   Expires 18 April 2026                 [Page 2]
+
+Internet-Draft       PQ Guidance for IETF protocolls        October 2025
+
+
 3.  Start using hybrid KEMs
 
    The main recommendation is to move as soon as practical to use of
    hybrid KEMs, such as X25519MLKEM768.
 
    Once it becomes practical to do the above, we do not recommend use of
-   non-hybrid groups.
-
-
-
-Farrell                   Expires 18 June 2025                  [Page 2]
-
-Internet-Draft             PQ Guidance for TLS             December 2024
-
+   non-hybrid groups or "pure" PQ KEMs.
 
 4.  Do nothing for now on signatures
 
    We recommend taking no action at all at this point in time in
-   relation to signatures.
+   relation to deployment of PQ signatures.
 
 5.  Security Considerations
 
@@ -154,6 +162,14 @@ Author's Address
    2
    Ireland
    Phone: +353-1-896-2354
+
+
+
+Farrell                   Expires 18 April 2026                 [Page 3]
+
+Internet-Draft       PQ Guidance for IETF protocolls        October 2025
+
+
    Email: stephen.farrell@cs.tcd.ie
 
 
@@ -165,4 +181,44 @@ Author's Address
 
 
 
-Farrell                   Expires 18 June 2025                  [Page 3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Farrell                   Expires 18 April 2026                 [Page 4]

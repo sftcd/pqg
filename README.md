@@ -1,3 +1,3 @@
 # pqg
 
-guidance on pq algs for tls
+Proposed guidance on use pq algs for IETF
