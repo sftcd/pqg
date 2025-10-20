@@ -14,9 +14,9 @@
 <?rfc rfcedstyle="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="bcp" docName="draft-farrell-tls-pqg-02" ipr="trust200902" >
+<rfc category="bcp" docName="draft-farrell-tls-pqg-03" ipr="trust200902" >
   <front>
-    <title abbrev="PQ Guidance for IETF protocols">Post-Quantum Guidance for IETF protocols.</title>
+    <title abbrev="PQ Guidance for current deployments of IETF protocols">Post-Quantum Guidance for current deployments of IETF protocols.</title>
 
     <author fullname="Stephen Farrell" initials="S." surname="Farrell">
       <organization>Trinity College Dublin</organization>

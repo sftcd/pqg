@@ -8,8 +8,8 @@ Intended status: Best Current Practice                   20 October 2025
 Expires: 23 April 2026
 
 
-               Post-Quantum Guidance for IETF protocols.
-                        draft-farrell-tls-pqg-02
+    Post-Quantum Guidance for current deployments of IETF protocols.
+                        draft-farrell-tls-pqg-03
 
 Abstract
 
@@ -55,7 +55,7 @@ Copyright Notice
 
 Farrell                   Expires 23 April 2026                 [Page 1]
 
-Internet-Draft       PQ Guidance for IETF protocols         October 2025
+Internet-Draft  PQ Guidance for current deployments of I    October 2025
 
 
 Table of Contents
@@ -111,7 +111,7 @@ Table of Contents
 
 Farrell                   Expires 23 April 2026                 [Page 2]
 
-Internet-Draft       PQ Guidance for IETF protocols         October 2025
+Internet-Draft  PQ Guidance for current deployments of I    October 2025
 
 
    It is quite likely this guidance will need to be updated with a
@@ -167,7 +167,7 @@ Internet-Draft       PQ Guidance for IETF protocols         October 2025
 
 Farrell                   Expires 23 April 2026                 [Page 3]
 
-Internet-Draft       PQ Guidance for IETF protocols         October 2025
+Internet-Draft  PQ Guidance for current deployments of I    October 2025
 
 
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
