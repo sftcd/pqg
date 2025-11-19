@@ -68,7 +68,7 @@ Table of Contents
    6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   4
    7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
    8.  Normative References  . . . . . . . . . . . . . . . . . . . .   4
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   5
 
 1.  Introduction
 
@@ -160,7 +160,7 @@ Internet-Draft  PQ Guidance for current deployments of I   November 2025
    For almost all deployments, we recommend taking no action at all at
    this point in time in relation to deployment of PQ signatures.
 
-   TODO: Define "almost all" somewhat better, but tersely.
+
 
 
 
@@ -169,6 +169,22 @@ Farrell                    Expires 23 May 2026                  [Page 3]
 
 Internet-Draft  PQ Guidance for current deployments of I   November 2025
 
+
+   Whereas key establishment needs to guard against passive attacks,
+   which may be conducted long after online communication has taken
+   place (e.g. harvest now, decrypt later attacks), signatures are
+   typically only required to guard against active attacks.  Therefore,
+   a traditional signature scheme can secure protocols for as long as
+   CRQCs do not exist.
+
+   Applications and protocols releasing data whose authenticity shall be
+   protected for a considerable amount of time (i.e.  beyond a time when
+   a CRQC may reasonably exist) will nonetheless benefit from the use of
+   post-quantum signature schemes.  In this case, we recommend hybrid
+   usage of the traditional and post-quantum signature schemes.  If only
+   integrity of the message is required (rather than integrity of the
+   signature) and the verification keys are trusted, this is easily
+   achieved by signing a message using each signature scheme in turn.
 
 5.  Security Considerations
 
@@ -197,6 +213,19 @@ Internet-Draft  PQ Guidance for current deployments of I   November 2025
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/info/rfc8446>.
 
+
+
+
+
+
+
+
+
+Farrell                    Expires 23 May 2026                  [Page 4]
+
+Internet-Draft  PQ Guidance for current deployments of I   November 2025
+
+
    [I-D.irtf-cfrg-hybrid-kems]
               Connolly, D., Barnes, R., and P. Grubbs, "Hybrid PQ/T Key
               Encapsulation Mechanisms", Work in Progress, Internet-
@@ -221,4 +250,31 @@ Author's Address
 
 
 
-Farrell                    Expires 23 May 2026                  [Page 4]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Farrell                    Expires 23 May 2026                  [Page 5]

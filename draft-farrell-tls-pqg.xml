@@ -168,7 +168,26 @@
             this point in time in relation to deployment of PQ signatures.
         </t>
 
-        <t>TODO: Define "almost all" somewhat better, but tersely.</t>
+        <t>
+                Whereas key establishment needs to guard against passive
+                attacks, which may be conducted long after online communication
+                has taken place (e.g. harvest now, decrypt later attacks),
+                signatures are typically only required to guard against active attacks.
+                Therefore, a traditional signature scheme can secure protocols
+                for as long as CRQCs do not exist.
+        </t>
+
+        <t>
+                Applications and protocols releasing data whose authenticity
+                shall be protected for a considerable amount of time (i.e.
+                beyond a time when a CRQC may reasonably exist) will nonetheless
+                benefit from the use of post-quantum signature schemes. In this
+                case, we recommend hybrid usage of the traditional and
+                post-quantum signature schemes. If only integrity of the message is
+                required (rather than integrity of the signature) and the
+                verification keys are trusted, this is easily achieved by signing
+                a message using each signature scheme in turn.
+        </t>
 
       </section>
 
