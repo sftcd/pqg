@@ -192,7 +192,15 @@
       </section>
 
     <section title="Security Considerations">
-        <t>TBD</t>
+	<t>
+                As we transition from RSA and ECC based algorithms to newer
+                approaches, we will necessarily gather implementation experience
+                and learn from failures. Protocol designers and implementors are
+                therefore advised to regularly monitor cryptanalytic
+                advancements as well as attacks against natural implementations
+                of newer schemes, and guard against failures using hybrid
+                constructions such as the ones indicated above.
+	</t>
 
     </section>
 
