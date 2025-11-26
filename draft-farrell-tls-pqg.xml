@@ -118,11 +118,46 @@
 
       <section title="Start using hybrid KEMs">
 
-          <t>The main recommendation is to move as soon as practical to use of
-              hybrid KEMs, such as X25519MLKEM768.</t>
+        <t>
+                The main recommendation is to move as soon as practical to use
+                of hybrid Key Encapsulation Mechanisms (KEMs).
+        </t>
 
-          <t>Once it becomes practical to do the above, we do not recommend use
-              of non-hybrid groups or "pure" PQ KEMs.</t>
+        <t>
+                Hybrid KEMs are combinations of two or more KEMs with
+                the goal of providing security as long as one of the
+                component KEMs is able to provide security. To this
+                extend, hybrid KEMs typically consist of a newer,
+                presumed post-quantum secure KEM (such as ML-KEM), to
+                guard against attacks by a CRQC, as well as an
+                established traditional KEM (such as variations of
+                DH-KEM), to guard against rapid cryptanalysis of the
+                post-quantum KEM.
+        </t>
+
+        <t>
+                While most hybrid KEM constructions provide
+                greater security guarantees than single KEMs, they may
+                differ in the exact scenarios in which they provide such
+                guarantees (e.g. only cryptanalysis against one KEM vs.
+                some implementation faults in one KEM). Absent protocol
+                specific considerations and countermeasures, a good
+                hybrid should bind both the session keys and ciphertexts
+                of the component KEMs in a way which is hard to get
+                wrong. For instance, the universal combiner in
+		<xref target="I-D.irtf-cfrg-hybrid-kems" /> does so at the combiner lever and
+                works for all combinations of KEMs, while the C2PRI
+                combiner from the same document will do so for many
+                post-quantum KEMs which hash the ciphertext into their
+                session key. In the case of TLS, the ciphertexts are bound by
+                the TLS-internal transcript hashing.
+        </t>
+
+        <t>
+                Once it becomes practical to use hybrid KEMs, such as
+                X25519MLKEM768, we do not recommend use
+                of non-hybrid groups or "pure" PQ KEMs.
+        </t>
 
       </section>
 
@@ -133,12 +168,39 @@
             this point in time in relation to deployment of PQ signatures.
         </t>
 
-        <t>TODO: Define "almost all" somewhat better, but tersely.</t>
+        <t>
+                Whereas key establishment needs to guard against passive
+                attacks, which may be conducted long after online communication
+                has taken place (e.g. harvest now, decrypt later attacks),
+                signatures are typically only required to guard against active attacks.
+                Therefore, a traditional signature scheme can secure protocols
+                for as long as CRQCs do not exist.
+        </t>
+
+        <t>
+                Applications and protocols releasing data whose authenticity
+                shall be protected for a considerable amount of time (i.e.
+                beyond a time when a CRQC may reasonably exist) will nonetheless
+                benefit from the use of post-quantum signature schemes. In this
+                case, we recommend hybrid usage of the traditional and
+                post-quantum signature schemes. If only integrity of the message is
+                required (rather than integrity of the signature) and the
+                verification keys are trusted, this is easily achieved by signing
+                a message using each signature scheme in turn.
+        </t>
 
       </section>
 
     <section title="Security Considerations">
-        <t>TBD</t>
+	<t>
+                As we transition from RSA and ECC based algorithms to newer
+                approaches, we will necessarily gather implementation experience
+                and learn from failures. Protocol designers and implementors are
+                therefore advised to regularly monitor cryptanalytic
+                advancements as well as attacks against natural implementations
+                of newer schemes, and guard against failures using hybrid
+                constructions such as the ones indicated above.
+	</t>
 
     </section>
 
@@ -156,6 +218,7 @@
       <?rfc include='reference.RFC.2119'?>
       <?rfc include='reference.RFC.8174'?>
       <?rfc include='reference.RFC.8446'?>
+      <?rfc include='reference.I-D.irtf-cfrg-hybrid-kems'?>
 
     </references>
 
