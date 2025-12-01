@@ -3,7 +3,7 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY rfc2119 SYSTEM "https://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc8174 SYSTEM "https://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml">
-<!ENTITY rfc8446 SYSTEM "https://xml.resource.org/public/rfc/bibxml/reference.RFC.8446.xml">
+<!ENTITY rfc8446 SYSTEM "https://xml.resource.org/public/rfc/bibxml/reference.RFC.9794.xml">
 
 ]>
 <?rfc toc="yes"?>
@@ -14,9 +14,9 @@
 <?rfc rfcedstyle="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="bcp" docName="draft-farrell-tls-pqg-03" ipr="trust200902" >
+<rfc category="bcp" docName="draft-farrell-tls-pqg-04" ipr="trust200902" >
   <front>
-    <title abbrev="PQ Guidance for current deployments of IETF protocols">Post-Quantum Guidance for current deployments of IETF protocols.</title>
+    <title abbrev="Current PQ Guidance">Post-Quantum Guidance for current deployments of IETF protocols.</title>
 
     <author fullname="Stephen Farrell" initials="S." surname="Farrell">
       <organization>Trinity College Dublin</organization>
@@ -37,60 +37,81 @@
 
     <area>Security Area</area>
 
-    <keyword>TLS, PQC</keyword>
-
     <keyword>Post-Quantum</keyword>
     <keyword>Guidance</keyword>
 
     <abstract>
-        <t>We provide guidance on the use of post-quantum algorithms for those
-            deploying applications using IETF protocols.</t>
+        <t>
+            We provide guidance on the use of post-quantum algorithms for those
+            currently deploying applications using IETF protocols with support
+            for such algorithms.
+        </t>
     </abstract>
   </front>
 
   <middle>
-    <section title="Introduction">
+    <section anchor="intro" title="Introduction">
 
         <t>
             [[This is not an "official" work item anywhere, the -00 was proposed
-            to TLS as such, but this version generalises to more than just TLS so 
-            is being proposed to the secdispatch list. The author does not expect
-            that the current text will garner rough consensus, but wonders if we
-            could get something useful that would without adding many words.
+            to TLS as such, but this version generalises to more than just TLS.
+            This was discussed at the IETF-124 secdispatch session and the outcome
+            was that further discussion should be on the general security area
+            list. (saag@ietf.org)
             The source for this is in https://github.com/sftcd/pqg/
             PRs are welcome there too.]]
         </t>
 
         <t>
             Due to concerns about the possible future existence of a
-            cryptographically
-            relevant quantum computer (CRQC), additional IANA
-            <xref target="RFC8446"/>
-            codepoints
-            have been defined for algorithms that are hoped to remain
-            secure even in the face of a CRQC. Adding code-points for
-            to the relevant IANA registries often
-            doesn't require IETF consensus. This
-            means that anyone can register code-points for their
-            favoured approach. In particular various government
-            entities in various countries have made contradictory
-            recommendations in this space, leading to potential
-            confusion for those deploying applilcations using TLS.
-            For example, anyone can register a PQ algorithm in the 
-            TLS registries with the RECOMMENDED column set to 'n'
+            cryptographically relevant quantum computer (CRQC),
+            a number of IETF working groups have defined ways in
+            which post-quantum (PQ) cryptographic algorithms
+            can be used with IETF protocols such as
+            TLS, SSH, IPsec, OpenPGP and others
+            and with the public key infrastructure (PKI) that
+            supports a number of these protocols.
+            Implementers have also made headway in
+            incorporating these changes into sometimes
+            widely used implementations.
         </t>
 
         <t>
-            This document sets out a deliberately concise set of
-            recommendations for typical uses of post-quantum
-            algorithms. This assumes the reader is familiar
-            with the topic. Some implementations and environments
+            However, once supported by implementations, these changes
+            support many different configurations so those deploying
+            post-quantum algorithms now can be faced with an
+            overly-broad set of choices, some of which might lead to
+            worse interoperability or even lesser security than
+            others. This document provides current guidance on a
+            very high-level set of deployment choices that are
+            recommended for use today.
+        </t>
+
+        <t>
+            It is reasonably likely that this guidance will
+            change in the not-too distant future, as post-quantum
+            support in protocols and implementations matures,
+            so this document may well be updated in the
+            relatively near future.
+        </t>
+
+        <t>
+            The format of this document is to provide very concise
+            guidance in <xref target="recs"/>, and follow that with
+            background material. A reader pressed for time may be
+            able to stop reading at the end of <xref target="recs"/>.
+            Some more specialised implementations and environments
             may have to meet other requirements that conflict with
-            this guidance.
+            this guidance - in such cases those deploying will
+            need to do more research in order to select good
+            options.
+            More detailed background is provided in 
+            <xref target="RFC9794"/> and
+            <xref target="I-D.ietf-pquip-pqc-engineers"/>.
         </t>
 
         <t>
-            Note that the audience for this document are those deploying
+            The audience for this document are those deploying
             systems now. This guidance is not aimed at those developing
             IETF protocols, nor implementations of those. Given that it
             seems that the latter groups (protocol developers and 
@@ -99,11 +120,6 @@
             systems now, that have such PQ all kinds of everything, 
             can benefit from simple guidance that addresses the most
             important aspect of the PQ transition.
-        </t>
-
-        <t>
-            It is quite likely this guidance will need to be updated with
-            a short-ish period (perhaps about two years).
         </t>
 
       </section>
@@ -116,86 +132,107 @@
         when, they appear in all capitals, as shown here.</t>
       </section>
 
-      <section title="Start using hybrid KEMs">
+
+      <section anchor="recs" title="Recommendations">
+
+      <section anchor="kems" title="Start using hybrid KEMs">
 
         <t>
-                The main recommendation is to move as soon as practical to use
-                of hybrid Key Encapsulation Mechanisms (KEMs).
+            We RECOMMEND moving as soon as practical to use
+            of PQ/T hybrid Key Encapsulation Mechanisms (KEMs).
+        </t>
+
+        <t>
+            Once it becomes practical to use hybrid KEMs, such as
+            X25519MLKEM768 for TLS, we do NOT RECOMMEND use
+            of non-hybrid/classic groups or "pure" PQ KEMs.
+        </t>
+
+      </section>
+
+      <section anchor="sigs" title="Do nothing for now on signatures">
+
+        <t>
+            For almost all deployments, we RECOMMEND taking no action at all at
+            this point in time in relation to deployment of PQ signatures.
+        </t>
+
+      </section>
+
+      </section>
+
+      <section anchor="background" title="Background and Justifications">
+
+        <t>
+            Many additional IANA codepoints (dozens) have been defined by
+            IETF working groups for algorithms that are hoped to remain
+            secure even in the face of a CRQC. Adding code-points to
+            some relevant IANA registries doesn't require IETF
+            consensus. This means that, in such case, anyone can register
+            code-points for their favoured approach, typically so
+            long as there is some specification for the algorithm
+            concerned. For example, anyone can register a PQ
+            algorithm in the TLS named group registry with the RECOMMENDED
+            column set to 'n'
+        </t>
+
+        <t>
+            Various government
+            entities in different countries have made contradictory
+            recommendations in this space, leading to potential
+            confusion for those deploying applications using PQ
+            algorithms.
         </t>
 
         <t>
                 Hybrid KEMs are combinations of two or more KEMs with
                 the goal of providing security as long as one of the
-                component KEMs is able to provide security. To this
-                extend, hybrid KEMs typically consist of a newer,
+                component KEMs is able to provide security. 
+                Hybrid KEMs therefore typically consist of a newer,
                 presumed post-quantum secure KEM (such as ML-KEM), to
                 guard against attacks by a CRQC, as well as an
                 established traditional KEM (such as variations of
-                DH-KEM), to guard against rapid cryptanalysis of the
+                ECDH-KEM), to guard against rapid cryptanalysis of the
                 post-quantum KEM.
         </t>
 
         <t>
-                While most hybrid KEM constructions provide
-                greater security guarantees than single KEMs, they may
+                Any reasonable Hybrid KEM construction provides
+                greater security guarantees than single KEMs, but they may
                 differ in the exact scenarios in which they provide such
                 guarantees (e.g. only cryptanalysis against one KEM vs.
-                some implementation faults in one KEM). Absent protocol
-                specific considerations and countermeasures, a good
-                hybrid should bind both the session keys and ciphertexts
-                of the component KEMs in a way which is hard to get
-                wrong. For instance, the universal combiner in
-		<xref target="I-D.irtf-cfrg-hybrid-kems" /> does so at the combiner lever and
-                works for all combinations of KEMs, while the C2PRI
-                combiner from the same document will do so for many
-                post-quantum KEMs which hash the ciphertext into their
-                session key. In the case of TLS, the ciphertexts are bound by
-                the TLS-internal transcript hashing.
-        </t>
-
-        <t>
-                Once it becomes practical to use hybrid KEMs, such as
-                X25519MLKEM768, we do not recommend use
-                of non-hybrid groups or "pure" PQ KEMs.
-        </t>
-
-      </section>
-
-      <section title="Do nothing for now on signatures">
-
-        <t>
-            For almost all deployments, we recommend taking no action at all at
-            this point in time in relation to deployment of PQ signatures.
+                some implementation faults in one KEM) and in how they
+                are used in specific protocols. Generally, the IETF
+                WG responsible for a specific protocol will have done the
+                analysis as to how to safely incorporate hybrid KEMs.
         </t>
 
         <t>
                 Whereas key establishment needs to guard against passive
                 attacks, which may be conducted long after online communication
-                has taken place (e.g. harvest now, decrypt later attacks),
+                has taken place (i.e. harvest now, decrypt later attacks),
                 signatures are typically only required to guard against active attacks.
                 Therefore, a traditional signature scheme can secure protocols
                 for as long as CRQCs do not exist.
         </t>
 
         <t>
-                Applications and protocols releasing data whose authenticity
-                shall be protected for a considerable amount of time (i.e.
-                beyond a time when a CRQC may reasonably exist) will nonetheless
-                benefit from the use of post-quantum signature schemes. In this
-                case, we recommend hybrid usage of the traditional and
-                post-quantum signature schemes. If only integrity of the message is
-                required (rather than integrity of the signature) and the
-                verification keys are trusted, this is easily achieved by signing
-                a message using each signature scheme in turn.
+            Systems dealing with signatures that are required to still be
+            usefully verifiable in the timeframe that might include a CRQC
+            are rare and complex and are not further considered here. Systems
+            that need to select a signature verification public key (and hence
+            algorithm) now, for use in some years time, are also not
+            covered by this guidance.
         </t>
 
       </section>
 
     <section title="Security Considerations">
+
 	<t>
                 As we transition from RSA and ECC based algorithms to newer
                 approaches, we will necessarily gather implementation experience
-                and learn from failures. Protocol designers and implementors are
+                and learn from failures. Those deploying such systems are
                 therefore advised to regularly monitor cryptanalytic
                 advancements as well as attacks against natural implementations
                 of newer schemes, and guard against failures using hybrid
@@ -205,7 +242,8 @@
     </section>
 
     <section title="Acknowledgements">
-        <t>TBD</t>
+        <t>Thanks to Thomas Bellebaum for (subsequently heavily edited) background text. All errors,
+            opinions, and ommisions of course remain the fault of the author.</t>
     </section>
 
     <section title="IANA Considerations">
@@ -217,15 +255,13 @@
     <references title="Normative References">
       <?rfc include='reference.RFC.2119'?>
       <?rfc include='reference.RFC.8174'?>
-      <?rfc include='reference.RFC.8446'?>
-      <?rfc include='reference.I-D.irtf-cfrg-hybrid-kems'?>
 
     </references>
 
-    <!--
     <references title="Informative References">
+      <?rfc include='reference.RFC.9794'?>
+      <?rfc include='reference.I-D.ietf-pquip-pqc-engineers'?>
     </references>
-    -->
 
   </back>
 </rfc>
